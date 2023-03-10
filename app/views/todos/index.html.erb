@@ -32,7 +32,7 @@
         <input type="hidden" id="content_box" name="query_user_id">
         <ul>
         <li>
-           <% @list_of_todos.each do |a_todo| %>
+           <% @list_next_up.each do |a_todo| %>
         
         <div>  <%= a_todo.content %> </div>
         
@@ -41,6 +41,8 @@
 
           <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
         </small>
+
+
 
         <form action="/modify_todo/<%= a_todo.id %>" method="post">
           <input type="hidden" name="query_status" value="in_progress">
@@ -58,7 +60,7 @@
         <input type="hidden" id="content_box" name="query_status">
                 <ul>
         <li>
-           <% @list_of_todos.each do |a_todo| %>
+           <% @list_in_progress.each do |a_todo| %>
         
         <div>  <%= a_todo.content %> </div>
         
@@ -83,14 +85,16 @@
         <input type="hidden" id="user_id_box" name="query_user_id">
           <ul>
       <li>
-       <% @list_of_todos.each do |a_todo| %>
+       <% @done.each do |a_todo| %>
+       
         <div><%= a_todo.content %></div>
 
         <small>
         <%= time_ago_in_words(a_todo.created_at) %> ago 
          <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
         </small>   
-        <% end %>     
+        <% end %>   
+        
       </li>
   </ul>
       </div>
@@ -185,5 +189,4 @@
     </table>
   </div>
 </div>
-
 <hr>

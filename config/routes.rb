@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get("/", { :controller => "todos", :action => "show" })
+  get("/", { :controller => "todos", :action => "index" })
   # Routes for the Todo resource:
 
   # CREATE
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # READ
   get("/todos/", { :controller => "todos", :action => "index" })
   
-  get("/todos/:path_id", { :controller => "todos", :action => "show" })
+  get("/todos/:path_id", { :controller => "todos", :action => "index" })
   
   # UPDATE
   
