@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
 
-  get("/", { :controller => "todos", :action => "index" })
+  get("/", { :controller => "todos", :action => "show" })
   # Routes for the Todo resource:
 
   # CREATE
   post("/insert_todo", { :controller => "todos", :action => "create" })
           
   # READ
-  get("/todos", { :controller => "todos", :action => "index" })
+  get("/todos/", { :controller => "todos", :action => "index" })
   
   get("/todos/:path_id", { :controller => "todos", :action => "show" })
   

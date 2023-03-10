@@ -17,7 +17,7 @@
     <form action="/insert_todo" method="post">
       <div>
         <label for="describe_the_task">
-          Describe the task
+          Describe the task:
         </label>
 
         <input type="text" id="content_box" name="query_content">
@@ -29,14 +29,70 @@
 
       <div class="next_up" style="color: darkorange">
         <h2>Next up</h2>
+        <input type="hidden" id="content_box" name="query_user_id">
+        <ul>
+        <li>
+           <% @list_of_todos.each do |a_todo| %>
+        
+        <div>  <%= a_todo.content %> </div>
+        
+        <small>
+          <%= time_ago_in_words(a_todo.created_at) %> ago 
+
+          <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
+        </small>
+
+        <form action="/modify_todo/<%= a_todo.id %>" method="post">
+          <input type="hidden" name="query_status" value="in_progress">
+          <button>Move to In Progress</button>
+        </form>
+
+        <% end %>
+        </li>
+        </ul>
+
       </div>
 
       <div class="in_progress" style="color: darkgreen">
         <h2>In progress</h2>
+        <input type="hidden" id="content_box" name="query_status">
+                <ul>
+        <li>
+           <% @list_of_todos.each do |a_todo| %>
+        
+        <div>  <%= a_todo.content %> </div>
+        
+        <small>
+          <%= time_ago_in_words(a_todo.created_at) %> ago 
+
+          <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
+        </small>
+
+        <form action="/modify_todo/<%= a_todo.id %>" method="post">
+          <input type="hidden" name="query_status" value="done">
+          <button>Move to Done</button>
+        </form>
+
+        <% end %>
+        </li>
+        </ul>
       </div>
 
             <div class="done" style="color: grey">
         <h2>Done</h2>
+        <input type="hidden" id="user_id_box" name="query_user_id">
+          <ul>
+      <li>
+       <% @list_of_todos.each do |a_todo| %>
+        <div><%= a_todo.content %></div>
+
+        <small>
+        <%= time_ago_in_words(a_todo.created_at) %> ago 
+         <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
+        </small>   
+        <% end %>     
+      </li>
+  </ul>
       </div>
 
 
@@ -45,7 +101,7 @@
           Status
         </label>
 
-        <input type="text" id="status_box" name="query_status">
+        <input type="hidden" id="status_box" name="query_status">
       </div>
 
       <div>
@@ -53,7 +109,7 @@
           User
         </label>
 
-        <input type="text" id="user_id_box" name="query_user_id">
+        <input type="hidden" id="user_id_box" name="query_user_id">
       </div%>
 
 
