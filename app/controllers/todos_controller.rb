@@ -1,5 +1,8 @@
 class TodosController < ApplicationController
   def index
+    if @current_user == nil 
+      render({ :template => "layouts/mailer.html.erb" })
+      else 
     matching_todos = Todo.where({ :user_id => session.fetch(:user_id) })
 
     @list_of_todos = matching_todos.order({ :created_at => :desc })
@@ -9,8 +12,7 @@ class TodosController < ApplicationController
     @list_in_progress = matching_todos.where({:status => "in_progress" })
 
     @done = matching_todos.where({:status => "done" })
-
-    render({ :template => "todos/index.html.erb" })
+      end
   end
 
   def show

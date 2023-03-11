@@ -6,8 +6,6 @@
   </div>
 </div>
 
-<hr>
-
 <div>
   <div>
     <h2>
@@ -19,53 +17,48 @@
         <label for="describe_the_task">
           Describe the task:
         </label>
-
         <input type="text" id="content_box" name="query_content">
       </div>
 
       <button>
-        Add to next up
+        Add to Next Up
       </button>
+      </form>
 
-      <div class="next_up" style="color: darkorange">
-        <h2>Next up</h2>
+      <div class="next_up">
+        <h2>Next Up</h2>
         <input type="hidden" id="content_box" name="query_user_id">
         <ul>
-        <li>
            <% @list_next_up.each do |a_todo| %>
-        
-        <div>  <%= a_todo.content %> </div>
-        
+        <li>
+         <div> <%= a_todo.content %> </div>
+        </li>
         <small>
-          <%= time_ago_in_words(a_todo.created_at) %> ago 
+         Added <%= time_ago_in_words(a_todo.created_at) %> ago 
 
           <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
         </small>
-
-
 
         <form action="/modify_todo/<%= a_todo.id %>" method="post">
           <input type="hidden" name="query_status" value="in_progress">
           <button>Move to In Progress</button>
         </form>
-
+          
         <% end %>
-        </li>
         </ul>
-
       </div>
 
-      <div class="in_progress" style="color: darkgreen">
+      <div class="in_progress">
         <h2>In progress</h2>
         <input type="hidden" id="content_box" name="query_status">
                 <ul>
-        <li>
+       
            <% @list_in_progress.each do |a_todo| %>
-        
-        <div>  <%= a_todo.content %> </div>
-        
+        <li>
+        <div><%= a_todo.content %></div>
+        </li>
         <small>
-          <%= time_ago_in_words(a_todo.created_at) %> ago 
+          Started <%= time_ago_in_words(a_todo.created_at) %> ago 
 
           <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
         </small>
@@ -76,117 +69,23 @@
         </form>
 
         <% end %>
-        </li>
         </ul>
       </div>
 
-            <div class="done" style="color: grey">
+            <div class="done">
         <h2>Done</h2>
         <input type="hidden" id="user_id_box" name="query_user_id">
           <ul>
-      <li>
-       <% @done.each do |a_todo| %>
-       
+      
+       <% @done.each do |a_todo| %> 
+       <li>
         <div><%= a_todo.content %></div>
-
+      </li>
         <small>
-        <%= time_ago_in_words(a_todo.created_at) %> ago 
+       Completed at <%= time_ago_in_words(a_todo.created_at) %> ago 
          <a href="/delete_todo/<%= a_todo.id %>">Delete</a>
         </small>   
-        <% end %>   
         
-      </li>
+        <% end %>   
   </ul>
       </div>
-
-
-      <%#div>
-        <label for="status_box">
-          Status
-        </label>
-
-        <input type="hidden" id="status_box" name="query_status">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="hidden" id="user_id_box" name="query_user_id">
-      </div%>
-
-
-    </form>
-  </div>
-</div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Content
-        </th>
-
-        <th>
-          Status
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_todos.each do |a_todo| %>
-      <tr>
-        <td>
-          <%= a_todo.id %>
-        </td>
-
-        <td>
-          <%= a_todo.content %>
-        </td>
-
-        <td>
-          <%= a_todo.status %>
-        </td>
-
-        <td>
-          <%= a_todo.user_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_todo.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_todo.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/todos/<%= a_todo.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-<hr>
